@@ -1,0 +1,3 @@
+Course for the Forward Deployed Engineer Role
+
+An impressive model response is not a delivered service. A useful service must answer a real user's question, respect access controls, survive source failures and have someone responsible when it breaks. A forward deployed engineer works across those boundaries. In this course you act as the embedded engineer for Halyard Freight, a fictional mid-sized freight forwarder. Your product is Ask Halyard, a permission-aware knowledge assistant for sales and operations, with citations, an HTTP API, an MCP server and eventually a small model that summarises support tickets.
