@@ -158,3 +158,6 @@ vite.config.ts.timestamp-*
 
 # VS Code
 .vscode/
+
+# Personal study notes
+notes/
