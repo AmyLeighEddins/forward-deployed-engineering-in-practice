@@ -273,3 +273,42 @@ Checked by code, pass/fail, no judgement:
 | Manifest | evals/golden/MANIFEST.json (SHA-256 hashes) |
 | Development vs held-out acceptance split | Write a separate set of development cases for day to day tuning and hold-out all 20 for release decision points to make evidence strong that it's working |
 
+## Tabletop results (simulated, not a real run)
+
+| Measure | Result | Threshold | Pass/fail |
+|---|---|---|---|
+| tool_routing | 19/20 | ≥ 0.9 | Pass |
+| retrieved_expected_doc | 17/20 | ≥ 0.8 | Pass |
+| answer_correct | 16/20 | ≥ 0.7 | Pass |
+| no_leak | One legal-title leak | = 1.0 | Fail |
+
+### Release decision
+No release because the leak blocks it no matter how good the other tests are.
+
+### Investigation owner
+Legal lead
+
+## One-week baseline design
+
+### Task selection
+Ask workers questions from the eval plan (G01-03, G06, G11-12, G16, G19-20) and time and grade their response. Also ask workers to time themselves for questions they would want to use Ask Halyard for in the future and record the correctness.
+
+### Timing
+Time starts from when a user starts searching for the answer and ends when they find it. That can mean searching on the drive or asking a college. 
+
+### Correctness review
+For the eval questions, we will have to get the answers from the owner anyways so that works out. For the ones they came up with we will ask the owner. 
+
+### Privacy safeguards and data minimization
+Tell them not to ask or record any sensitive information (we have the eval questions for the sensitive data which we won't record, but will have to get approval to talk about with worker). Record only the task type, timing, and correctness. No actual questions, who asked them, or the answer. 
+
+### Acceptance ownership
+Product owner and sponsor. 
+
+## Proposed latency and cost budget (awaiting sponsor and platform approval)
+
+| Measure | Proposed budget | Basis |
+|---|---|---|
+| p50 latency | 3s | Quick answer |
+| p95 latency | 10s | Long answer that might frustrate user |
+| Cost per request | Under $0.03 | (tokens per request) × (model price per token) |
