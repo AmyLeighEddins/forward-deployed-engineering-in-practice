@@ -37,6 +37,13 @@
 - **Verification:** Run requests that access confidential text and make sure it is redacted in traces
 - **Release status:** Blocks pilot
 
+### 6. Citation cache without permission checks
+- **Production risk:** Leak of sensitive data
+- **Replacement:** Permission aware cache that is cleared on model, prompt, or index update
+- **Owner:** Platform lead, Legal lead approves
+- **Verification:** Sales user asks the same question a legal user asks (no updates in between, cache intact) and nothing leaks
+- **Release status:** Blocks pilot
+
 ## Readiness table
 
 ### Identity
@@ -124,3 +131,17 @@
 - **Exit evidence:** Golden set run passed
 - **Approver:** Platform lead and sponsor
 - **Rollback:** Switch assistant off in prod, disable affected tools, restore last passing model, prompt, and index, and invalidate caches
+
+## Tabletop: citation cache leak
+
+**Scenario:** The assistant keeps saved copies of earlier citations for speed. A model upgrade improves average correctness, but afterwards a saved copy shows a legal filename to someone who may not see it.
+
+- **Decision:** No-go, despite the better average because any leak blocks release
+- **Containment:** Turn off cache
+- **Configuration rollback:** Last known good model, prompt, and index
+- **Cache invalidation:** Clear cache
+- **Incident owner:** Legal lead
+- **Re-test required:** Add a new test to the eval plan where a legal user asks and question, cache is saved, and then a sales user asks the same question, and make sure nothing leaks. Then evals must all pass again.
+
+**Row that should have caught this:**
+The debt register and readiness tables cover cache, so there isn't a current case for this, so added #6 to debt register. The eval plan also needs a multi-user case.
